@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+   mapper是当前文件的根标签，必须的。
+   namespace：叫做命名空间，唯一值的，可以是自定义的字符串
+               要求你使用dao接口的全限定名称。
+
+   在当前文件中，可以使用特定的标签，表示数据库的特定操作
+   <select>：表示执行查询
+   <update>: 表示更新数据库操作
+   <insert>：表示插入
+   <delete>：表示删除
+-->
+<mapper namespace="com.dlkyy.dao.StudentDao">
+    <!--
+    select: 表示查询操作。
+    id：你要执行的sql语法的唯一表示，mybatis会使用这个id的值来找到要执行的sql语句。
+        可以自定义，但是要求你使用接口中的方法名称。
+
+    resultType：表示结果类型的，是sql语句执行后得到ResultSet
+        遍历这个ResultSet得到java对象的类型。
+        值写类型全限定名称
+-->
+  <select id="selectStudents" resultType="com.dlkyy.entity.Student">
+      select id,name,email,age from student order by id
+  </select>
+  <!--插入操作-->
+  <insert id="insertStudent">
+        insert into student values(#{id}, #{name}, #{email}, #{age});
+  </insert>
+</mapper>
+
+
+
