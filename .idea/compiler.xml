@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="mybatis03-proxy" />
         <module name="mybatis01" />
         <module name="mybatis02" />
       </profile>
@@ -13,6 +14,7 @@
     <bytecodeTargetLevel>
       <module name="mybatis01" target="1.8" />
       <module name="mybatis02" target="1.8" />
+      <module name="mybatis03-proxy" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

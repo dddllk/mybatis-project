@@ -5,10 +5,11 @@
       <list>
         <option value="$PROJECT_DIR$/mybatis01/pom.xml" />
         <option value="$PROJECT_DIR$/mybatis02/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis03-proxy/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
