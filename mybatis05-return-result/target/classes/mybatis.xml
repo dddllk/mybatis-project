@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--settings：控制mybatis全局行为-->
+    <settings>
+        <!--设置mybatis输出日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--定义别名-->
+    <typeAliases>
+        <!--
+        第一种方式：
+            可以指定一个类型一个自定义别名
+            type：自定义类型的全限定名称
+            alias：别名（短小，容易记忆的）
+        -->
+        <!--<typeAlias type="com.dlkyy.entity.Student" alias="stu"/>-->
+        <!--<typeAlias type="com.dlkyy.vo.QueryParam" alias="qp"/>-->
+        <!--
+         第二种方式：
+            <package> name是包名，这个包中的所有类，类名就是别名（类名不区分大小写）
+            推荐使用全限定名称，不使用别名
+            因为不同包名下可能出现相同的类，这样的话会报错
+        -->
+        <!--<package name="com.dlkyy.entity"/>-->
+        <!--<package name="com.dlkyy.vo"/>-->
+    </typeAliases>
+    <!--环境配置信息-->
+    <environments default="mydev">
+        <environment id="mydev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3309/bjpowernode"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--类路径-->
+        <mapper resource="com/dlkyy/dao/StudentDao.xml"/>
+    </mappers>
+</configuration>
+
+
+<!--定义别名
+    1）在mybatis主配置文件中定义，使用<typeAlias>定义别名
+    2）可以在resultType中使用自定义的别名
+-->
