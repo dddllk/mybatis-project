@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dlkyy.dao.StudentDao">
+    <!--定义sql片段-->
+    <sql id="studentSql">
+        select id,name,age,email from Student
+    </sql>
+    <!--if-->
+    <select id="selectStudentIf" resultType="com.dlkyy.entity.Student">
+        <include refid="studentSql"/>
+        where 1=1
+        <if test="name != null and name != '' ">
+            name = #{name}
+        </if>
+        <if test="age > 0">
+            and age > #{age}
+        </if>
+    </select>
+
+    <!--where-->
+    <select id="selectStudentWhere" resultType="com.dlkyy.entity.Student">
+        <include refid="studentSql"/>
+        <where>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+            <if test="age > 0">
+                or age > #{age}
+            </if>
+        </where>
+    </select>
+
+    <!--Foreach one -->
+    <select id="selectStudentForeachOne" resultType="com.dlkyy.entity.Student">
+        <include refid="studentSql"/> where id in
+        <foreach collection="list" item="myid" open="(" close=")" separator=",">
+           #{myid}
+        </foreach>
+    </select>
+
+    <!--Foreach two-->
+    <select id="selectStudentForeachTwo" resultType="com.dlkyy.entity.Student">
+        <include refid="studentSql"/> where id in (
+        <foreach collection="list" item="stu">
+            #{stu.id},
+        </foreach>
+        -1)
+    </select>
+
+    <!--查询所有-->
+    <select id="selectAll" resultType="com.dlkyy.entity.Student">
+        select * from student order by id
+    </select>
+</mapper>
+
+
+
+

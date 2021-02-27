@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--指定properties文件的位置，从类路径根开始找文件-->
+    <properties resource="jdbc.properties"/>
+    <!--settings：控制mybatis全局行为-->
+    <settings>
+        <!--设置mybatis输出日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--定义别名-->
+    <typeAliases>
+        <!--
+        第一种方式：
+            可以指定一个类型一个自定义别名
+            type：自定义类型的全限定名称
+            alias：别名（短小，容易记忆的）
+        -->
+        <!--<typeAlias type="com.dlkyy.entity.Student" alias="stu"/>-->
+        <!--<typeAlias type="com.dlkyy.vo.QueryParam" alias="qp"/>-->
+        <!--
+         第二种方式：
+            <package> name是包名，这个包中的所有类，类名就是别名（类名不区分大小写）
+            推荐使用全限定名称，不使用别名
+            因为不同包名下可能出现相同的类，这样的话会报错
+        -->
+        <!--<package name="com.dlkyy.entity"/>-->
+        <!--<package name="com.dlkyy.vo"/>-->
+    </typeAliases>
+    <!--配置插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+    <!--环境配置信息-->
+    <environments default="mydev">
+        <environment id="mydev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--第一种方式：指定多个mapper文件-->
+        <!--<mapper resource="com/dlkyy/dao/StudentDao.xml"/>-->
+
+        <!--第二种方式：使用包名
+           name:xml文件（mapper文件）所在的包名
+           这个包中的所有xml文件一次都能加载到mybatis
+           使用要求：
+            1.mapper文件名称需要和接口名称一样，区分大小写
+            2.mapper文件和dao接口需要在同一目录
+        -->
+        <package name="com.dlkyy.dao"/>
+    </mappers>
+</configuration>
+
+
+<!--定义别名
+    1）在mybatis主配置文件中定义，使用<typeAlias>定义别名
+    2）可以在resultType中使用自定义的别名
+-->
